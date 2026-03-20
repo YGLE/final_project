@@ -1,4 +1,4 @@
-from emotion_detection import emotion_detector  # Import the emotion_detection module
+from EmotionDetection.emotion_detection import emotion_detector  # Import the emotion_detection module
 
 def test_emotion_detection():
     texts = [
