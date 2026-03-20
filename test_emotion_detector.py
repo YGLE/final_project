@@ -2,9 +2,11 @@ from emotion_detection import emotion_detector  # Import the emotion_detection m
 
 def test_emotion_detection():
     texts = [
-        "I hate bananas. Bananas are bad.",
+        "I really hate bananas. Bananas are bad.",
+        "I'm scared about spiders.",
         "I am feeling very happy today.",
         "This is a sad day.",
+        "",
         "I'm not sure how I feel right now."
     ]
 

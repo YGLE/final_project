@@ -10,8 +10,31 @@ def emotion_detector(text_to_analyze):
     try:
         response = requests.post(url, json = payload, headers=headers)  # Send a POST request to the API service
         response.raise_for_status()  # Raise an exception for HTTP errors
-        return response.text  # Return the API response
+        response_dict = json.loads(response.text) # convert response to a dictionary
+
+        # extract scores of emotion
+        emotion_data = response_dict['emotionPredictions'][0]['emotion']
+        anger_score = emotion_data['anger']
+        disgust_score = emotion_data['disgust']
+        fear_score = emotion_data['fear']
+        joy_score = emotion_data['joy']
+        sadness_score = emotion_data['sadness']
         
+        # find the dominant emotion
+        scores = {
+            'anger': anger_score,
+            'disgust': disgust_score,
+            'fear': fear_score,
+            'joy': joy_score,
+            'sadness': sadness_score
+        }
+        dominant_emotion = max(scores, key=scores.get)
+
+        # return the dominant emotion
+        return {
+            'dominant_emotion': dominant_emotion
+        }
+
     except requests.exceptions.HTTPError as e:
         if response.status_code == 400:
             print("Error 400 : Empty text or bad format")
@@ -22,4 +45,8 @@ def emotion_detector(text_to_analyze):
         else:
             print(f"HTTP error: {e}")
     except requests.exceptions.RequestException as e:
-        print(f"Request error: {e}")
+        print(f"Request error: {e}") 
+    return {
+        'anger': None, 'disgust': None, 'fear': None, 'joy': None, 'sadness': None,
+        'dominant_emotion': None
+        }
