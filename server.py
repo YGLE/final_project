@@ -1,9 +1,9 @@
 from flask import Flask, request, jsonify, render_template
 from EmotionDetection.emotion_detection import emotion_detector
 
-app = Flask("EmotionDetector")
+app = Flask("emotionDetector")
 
-@app.route('/emotionDetector', methods=['GET'])
+@app.route("/emotionDetector")
 def detect_emotion():
     # Retrieve the text to analyze from the request arguments
     text_to_analyze = request.args.get('textToAnalyze')
@@ -25,6 +25,7 @@ def detect_emotion():
 
 @app.route("/")
 def render_index_page():
+
     return render_template('index.html')
 
 if __name__ == '__main__':
