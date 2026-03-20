@@ -1,21 +1,21 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from EmotionDetection.emotion_detection import emotion_detector
 
-app = Flask(__name__)
+app = Flask("EmotionDetector")
 
 @app.route('/emotionDetector', methods=['GET'])
 def detect_emotion():
-    # Récupérer le texte depuis les paramètres de la requête
+    # Retrieve the text to analyze from the request arguments
     text_to_analyze = request.args.get('textToAnalyze')
 
-    # Appeler la fonction emotion_detector
+    # Call emotion_detector function
     result = emotion_detector(text_to_analyze)
 
-    # Gérer le cas de texte vide ou None
+    # Manage error case
     if result['dominant_emotion'] is None:
         return "Invalid text! Please try again!"
 
-    # Formater la réponse comme demandé
+    # Format and return the response
     response_text = (
         f"For the given statement, the system response is 'anger': {result['anger']}, "
         f"'disgust': {result['disgust']}, 'fear': {result['fear']}, 'joy': {result['joy']} "
@@ -26,6 +26,6 @@ def detect_emotion():
 @app.route("/")
 def render_index_page():
     return render_template('index.html')
-    
+
 if __name__ == '__main__':
     app.run(host='localhost', port=5000)   
