@@ -1,0 +1,15 @@
+theia@theiadocker-yannglever:/home/project/final_project$ python3.11 test_emotion_detection.py 
+Testing with text: I am glad this happened.
+Emotion Response: {'dominant_emotion': 'joy'}
+
+Testing with text: I am really mad about this.
+Emotion Response: {'dominant_emotion': 'anger'}
+
+Testing with text: I feel disgusted just hearing about this.
+Emotion Response: {'dominant_emotion': 'disgust'}
+
+Testing with text: I am so sad about this.
+Emotion Response: {'dominant_emotion': 'sadness'}
+
+Testing with text: I am really afraid that this will happen
+Emotion Response: {'dominant_emotion': 'fear'}
