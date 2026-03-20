@@ -1,21 +1,10 @@
-"""
-Flask application for emotion detection using Watson NLP API.
-Handles emotion analysis of text via a GET request.
-"""
-
-from flask import Flask, request, render_template
+from flask import Flask, request, jsonify, render_template
 from EmotionDetection.emotion_detection import emotion_detector
 
 app = Flask("emotionDetector")
 
 @app.route("/emotionDetector")
 def detect_emotion():
-    """
-    Analyze the emotion of a given text.
-    
-    Retrieves the 'textToAnalyze' parameter from the request,
-    sends it to the emotion_detector function, and returns a formatted response.
-    """
     # Retrieve the text to analyze from the request arguments
     text_to_analyze = request.args.get('textToAnalyze')
 
@@ -36,10 +25,8 @@ def detect_emotion():
 
 @app.route("/")
 def render_index_page():
-    """
-    Render the index.html template for the root URL.
-    """
+
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=5000)
+    app.run(host='localhost', port=5000)   
